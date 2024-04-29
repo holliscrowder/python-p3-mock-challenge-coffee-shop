@@ -13,18 +13,17 @@ class TestCustomer:
         customer = Customer("Steve")
         assert customer.name == "Steve"
 
-
     def test_name_is_mutable_string(self):
         """name is a mutable string"""
         customer = Customer("Steve")
         customer.name = "Stove"
-        
+
         assert customer.name == "Stove"
-        
+
         # comment out the next two lines if using Exceptions
         customer.name = 1
         assert customer.name == "Stove"
-        
+
         assert isinstance(customer.name, str)
 
         # uncomment the next two lines if using Exceptions
@@ -39,7 +38,7 @@ class TestCustomer:
         # comment out the next two lines if using Exceptions
         customer.name = ""
         assert customer.name == "Steve"
-        
+
         # comment out the next two lines if using Exceptions
         customer.name = "TooLongForAName!"
         assert customer.name == "Steve"
@@ -113,7 +112,7 @@ class TestCustomer:
 
         assert isinstance(customer.coffees()[0], Coffee)
         assert isinstance(customer.coffees()[1], Coffee)
-    
+
     def test_create_order(self):
         """creates a new order for a customer"""
         coffee_1 = Coffee("Vanilla Latte")
@@ -122,26 +121,25 @@ class TestCustomer:
         customer_2 = Customer("Dima")
         order_1 = customer_1.create_order(coffee_1, 2.0)
         order_2 = customer_2.create_order(coffee_2, 5.0)
-        
+
         # check that the order is of type Order
         assert isinstance(order_1, Order)
         assert isinstance(order_2, Order)
-        
+
         # check that the order has the correct customer and coffee
         assert order_1.customer == customer_1
         assert order_1.coffee == coffee_1
         assert order_2.customer == customer_2
         assert order_2.coffee == coffee_2
-        
-        
-    # def test_most_aficionado(self):
-    #     """the customer who has spent the most on the coffee instance provided."""
-    #     coffee = Coffee("Vanilla Latte")
-    #     steve = Customer("Steve")
-    #     dima = Customer("Dima")
-    #     Order(steve, coffee, 2.0)
-    #     Order(steve, coffee, 4)
-    #     Order(dima, coffee, 5.0)
-    #     Order(dima, coffee, 2.0)
-        
-    #     assert (Customer.most_aficionado(coffee) == dima)
+
+    def test_most_aficionado(self):
+        """the customer who has spent the most on the coffee instance provided."""
+        coffee = Coffee("Vanilla Latte")
+        steve = Customer("Steve")
+        dima = Customer("Dima")
+        Order(steve, coffee, 2.0)
+        Order(steve, coffee, 4.0)
+        Order(dima, coffee, 5.0)
+        Order(dima, coffee, 2.0)
+
+        assert Customer.most_aficionado(coffee) == dima
